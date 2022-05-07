@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 public @interface ConfigurationFile {
 
     String directory() default "./";
-    String name();
+    String file();
 
 }

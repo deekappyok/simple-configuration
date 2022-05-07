@@ -70,7 +70,7 @@ class Bootstrap {
 ```java
 @ConfigurationFile(
     directory = "./configs/test",
-    name = "config.json"
+    file = "config.json"
 )
 class Config {
     private String name;
