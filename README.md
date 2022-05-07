@@ -18,7 +18,7 @@ A simple json configuration system built with [gson](https://github.com/google/g
 <dependency>
     <groupId>com.github.DeeKaPPy</groupId>
     <artifactId>simple-configuration</artifactId>
-    <version>1.1-SNAPSHOT</version> <!-- or replace with newer version -->
+    <version>1.2-SNAPSHOT</version> <!-- or replace with newer version -->
 </dependency>
 ```
 
