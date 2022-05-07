@@ -1,41 +1,20 @@
-
-import com.google.gson.*;
+import eu.dkcode.gson.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.potion.PotionEffect;
 
 import java.lang.reflect.Type;
 
+/**
+ * @Author Kacper 'DeeKaPPy' Horbacz
+ * @Created 08.05.2022
+ * @Class Location
+ **/
 
 public class LocationAdapter implements JsonDeserializer<Location>, JsonSerializer<Location> {
-
     @Override
     public Location deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        return fromJson(jsonElement);
-    }
-
-    @Override
-    public JsonElement serialize(Location location, Type type, JsonSerializationContext jsonSerializationContext) {
-        return toJson(location);
-    }
-
-    public static JsonObject toJson(Location location) {
-        final JsonObject jsonObject = new JsonObject();
-
-        jsonObject.addProperty("world", location.getWorld().getName());
-        jsonObject.addProperty("x", location.getX());
-        jsonObject.addProperty("y", location.getY());
-        jsonObject.addProperty("z", location.getZ());
-        jsonObject.addProperty("yaw", location.getYaw());
-        jsonObject.addProperty("pitch", location.getPitch());
-
-        return jsonObject;
-    }
-
-
-    public static Location fromJson(JsonElement jsonElement) {
-        if (jsonElement == null || !jsonElement.isJsonObject()) return null;
-
-        final JsonObject jsonObject = jsonElement.getAsJsonObject();
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
 
         return new Location(
                 Bukkit.getWorld(jsonObject.get("world").getAsString()),
@@ -45,5 +24,19 @@ public class LocationAdapter implements JsonDeserializer<Location>, JsonSerializ
                 jsonObject.get("yaw").getAsFloat(),
                 jsonObject.get("pitch").getAsFloat()
         );
+    }
+
+    @Override
+    public JsonElement serialize(Location location, Type type, JsonSerializationContext jsonSerializationContext) {
+        JsonObject object = new JsonObject();
+
+        object.addProperty("world", location.getWorld().getName());
+        object.addProperty("x", location.getX());
+        object.addProperty("y", location.getY());
+        object.addProperty("z", location.getZ());
+        object.addProperty("yaw", location.getYaw());
+        object.addProperty("pitch", location.getPitch());
+
+        return object;
     }
 }
