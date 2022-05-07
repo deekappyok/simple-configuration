@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.dkcode</groupId>
-    <artifactId>bukkit-json-configuration</artifactId>
+    <artifactId>json-configuration</artifactId>
     <version>1.1-SNAPSHOT</version>
 
     <properties>
@@ -28,6 +28,15 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>com.google.gson</pattern>
+                                    <shadedPattern>eu.dkcode.gson</shadedPattern>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
