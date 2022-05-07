@@ -1,3 +1,4 @@
+import com.google.gson.GsonBuilder;
 import eu.dkcode.configuration.ConfigLoader;
 import eu.dkcode.configuration.annotations.ConfigurationExclusion;
 import eu.dkcode.configuration.annotations.ConfigurationFile;
@@ -28,6 +29,12 @@ public class ConfigurationLoaderTest {
 
             configuration.name = "save_test";
             configLoader.save(Configuration.class, configuration);
+
+            GsonBuilder gsonBuilder = configLoader.getGsonBuilder();
+
+            gsonBuilder.disableHtmlEscaping();
+
+            configLoader.setGsonBuilder(gsonBuilder);
 
 
         } catch (UnAnnotatedException | IOException e) {

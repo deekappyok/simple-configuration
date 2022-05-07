@@ -24,24 +24,45 @@ A simple json configuration system built with [gson](https://github.com/google/g
 
 ## Usage 📚
 ### Initialize
+
 ```java
+import com.google.gson.GsonBuilder;
+
 class Bootstrap {
-    
-    private final ConfigLoader loader;
-    
+
+    private final ConfigLoader configLoader;
+
     public Bootstrap() {
 
-        loader = new ConfigLoader(); // you can add you own gson instance
+        configLoader = new ConfigLoader(); // you can add you own gson instance
 
-        // loading
-        Config config = loader.load(Config.class, new Config()); // pass the class and default options
+        /*
+        loading
+         */
+        Config config = configLoader.load(Config.class, new Config()); // pass the class and default options
 
         config.setName("John");
 
-        // save
-        loader.save(Config.class, config); // pass the class and the config object
+        /*
+        save
+         */
+        configLoader.save(Config.class, config); // pass the class and the config object
+
+        /*
+        add custom adapters
+         */
+        configLoader.addAdapter(NewAdapter.class, new NewAdapter());
+        
+        /*
+        add any other custom properties to GsonBuilder
+         */
+        GsonBuilder gsonBuilder = configLoader.getGsonBuilder(); // get the gson builder
+        gsonBuilder.registerTypeAdapter(ExampleAdapter.class, new ExampleAdapter());
+        gsonBuilder.excludeFieldsWithoutExposeAnnotation();
+        
+        configLoader.setGsonBuilder(gsonBuilder); // re set the gson builder
     }
-    
+
 }
 ```
 
@@ -49,7 +70,7 @@ class Bootstrap {
 ```java
 @ConfigurationFile(
     directory = "./configs/test",
-    file = "config.json"
+    name = "config.json"
 )
 class Config {
     private String name;

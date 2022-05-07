@@ -1,15 +1,16 @@
 package eu.dkcode.configuration;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import eu.dkcode.configuration.annotations.ConfigurationFile;
 import eu.dkcode.configuration.exceptions.UnAnnotatedException;
 import eu.dkcode.configuration.helpers.GsonHelper;
+import lombok.Getter;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * @Author Kacper 'DeeKaPPy' Horbacz
@@ -19,14 +20,26 @@ import java.nio.file.Path;
 
 public class ConfigLoader {
 
-    private final Gson gson;
+    @Getter private GsonBuilder gsonBuilder;
+    private Gson gson;
 
-    public ConfigLoader(Gson gson) {
-        this.gson = gson;
+    public ConfigLoader(GsonBuilder gsonBuilder) {
+        this.gsonBuilder = gsonBuilder;
+        this.gson = gsonBuilder.create();
     }
 
     public ConfigLoader(){
         this(new GsonHelper().getGson());
+    }
+
+    public void addAdapter(Class<?> clazz, Object adapter) {
+        gsonBuilder.registerTypeAdapter(clazz, adapter);
+        gson = gsonBuilder.create();
+    }
+
+    public void setGsonBuilder(GsonBuilder gsonBuilder) {
+        this.gsonBuilder = gsonBuilder;
+        this.gson = gsonBuilder.create();
     }
 
     public <T> T load(Class<T> tClass, Object defaults) throws UnAnnotatedException, IOException {
