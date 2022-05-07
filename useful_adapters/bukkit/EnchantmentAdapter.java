@@ -1,4 +1,3 @@
-package eu.dkcode.configuration.adapters.bukkit;
 
 import com.google.gson.*;
 import org.bukkit.enchantments.Enchantment;
