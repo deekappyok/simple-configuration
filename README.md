@@ -51,13 +51,13 @@ class Bootstrap {
         /*
         add custom adapters
          */
-        configLoader.addAdapter(NewAdapter.class, new NewAdapter());
+        configLoader.addAdapter(NewObject.class, new NewAdapter());
         
         /*
         add any other custom properties to GsonBuilder
          */
         GsonBuilder gsonBuilder = configLoader.getGsonBuilder(); // get the gson builder
-        gsonBuilder.registerTypeAdapter(ExampleAdapter.class, new ExampleAdapter());
+        gsonBuilder.registerTypeAdapter(ExampleObject.class, new ExampleAdapter());
         gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         
         configLoader.setGsonBuilder(gsonBuilder); // re set the gson builder
