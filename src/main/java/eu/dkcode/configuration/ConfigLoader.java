@@ -49,7 +49,7 @@ public class ConfigLoader {
         ConfigurationFile configurationFile = tClass.getAnnotation(ConfigurationFile.class);
 
         String fileDirectory = configurationFile.directory();
-        String fileName = configurationFile.name();
+        String fileName = configurationFile.file();
 
         File file = new File(fileDirectory + "/" + fileName);
 
@@ -65,7 +65,7 @@ public class ConfigLoader {
         ConfigurationFile configurationFile = tClass.getAnnotation(ConfigurationFile.class);
 
         String fileDirectory = configurationFile.directory();
-        String fileName = configurationFile.name();
+        String fileName = configurationFile.file();
 
         File directory = new File(fileDirectory);
         if (!directory.exists())
