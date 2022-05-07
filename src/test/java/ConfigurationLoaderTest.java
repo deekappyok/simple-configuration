@@ -43,7 +43,7 @@ public class ConfigurationLoaderTest {
 
     }
 
-    @ConfigurationFile(directory = "src/test/resources/config/test", name = "configuration.json")
+    @ConfigurationFile(directory = "src/test/resources/config/test", file = "configuration.json")
     static class Configuration {
         private String name;
         @ConfigurationExclusion
