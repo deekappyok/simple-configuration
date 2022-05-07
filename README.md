@@ -26,8 +26,6 @@ A simple json configuration system built with [gson](https://github.com/google/g
 ### Initialize
 
 ```java
-import com.google.gson.GsonBuilder;
-
 class Bootstrap {
 
     private final ConfigLoader configLoader;
