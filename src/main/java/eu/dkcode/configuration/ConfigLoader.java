@@ -10,6 +10,7 @@ import lombok.Getter;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 /**
@@ -54,7 +55,7 @@ public class ConfigLoader {
         File file = new File(fileDirectory + "/" + fileName);
 
         if(file.exists())
-            return gson.fromJson(new String(Files.readAllBytes(file.toPath())), tClass);
+            return gson.fromJson(new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8), tClass);
 
         return save(tClass, defaults);
     }
