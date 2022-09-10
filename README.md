@@ -7,8 +7,8 @@ A simple json configuration system built with [gson](https://github.com/google/g
 ```xml
 <repositories>
     <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
+        <id>eu.dkcode</id>
+        <url>https://repo.dkcode.eu</url>
     </repository>
 </repositories>
 ```
@@ -16,8 +16,8 @@ A simple json configuration system built with [gson](https://github.com/google/g
 **DEPENDENCY**
 ```xml
 <dependency>
-    <groupId>com.github.DeeKaPPy</groupId>
-    <artifactId>simple-configuration</artifactId>
+    <groupId>eu.dkcode</groupId>
+    <artifactId>json-configuration</artifactId>
     <version>1.3-SNAPSHOT</version> <!-- or replace with newer version -->
 </dependency>
 ```
