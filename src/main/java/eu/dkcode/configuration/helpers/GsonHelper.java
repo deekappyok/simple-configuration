@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import eu.dkcode.configuration.adapters.ExclusionAdapter;
 import eu.dkcode.configuration.adapters.LongAdapter;
-import lombok.Getter;
 
 /**
  * @Author Kacper 'DeeKaPPy' Horbacz
@@ -14,7 +13,7 @@ import lombok.Getter;
 
 public class GsonHelper {
 
-    @Getter private final GsonBuilder gson = new Gson().newBuilder()
+     private final GsonBuilder gson = new Gson().newBuilder()
             // other
             .registerTypeHierarchyAdapter(Long.class, new LongAdapter())
             .setExclusionStrategies(new ExclusionAdapter())
@@ -22,4 +21,7 @@ public class GsonHelper {
             .setPrettyPrinting()
             .serializeNulls();
 
+    public GsonBuilder getGson() {
+        return gson;
+    }
 }

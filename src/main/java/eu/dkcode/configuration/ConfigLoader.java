@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import eu.dkcode.configuration.annotations.ConfigurationFile;
 import eu.dkcode.configuration.exceptions.UnAnnotatedException;
 import eu.dkcode.configuration.helpers.GsonHelper;
-import lombok.Getter;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import java.nio.file.Files;
 
 public class ConfigLoader {
 
-    @Getter private GsonBuilder gsonBuilder;
+    private GsonBuilder gsonBuilder;
     private Gson gson;
 
     public ConfigLoader(GsonBuilder gsonBuilder) {
@@ -43,7 +42,7 @@ public class ConfigLoader {
         this.gson = gsonBuilder.create();
     }
 
-    public <T> T load(Class<T> tClass, Object defaults) throws UnAnnotatedException, IOException {
+    public <T> T load(Class<T> tClass, T defaults) throws UnAnnotatedException, IOException {
         if(!tClass.isAnnotationPresent(ConfigurationFile.class))
             throw new UnAnnotatedException("Class " + tClass.getName() + " is not annotated with @ConfigurationFile");
 
@@ -60,7 +59,7 @@ public class ConfigLoader {
         return save(tClass, defaults);
     }
 
-    public <T> T save(Class<T> tClass, Object defaults) throws UnAnnotatedException, IOException {
+    public <T> T save(Class<T> tClass, T defaults) throws UnAnnotatedException, IOException {
         if (!tClass.isAnnotationPresent(ConfigurationFile.class))
             throw new UnAnnotatedException("Class " + tClass.getName() + " is not annotated with @ConfigurationFile");
         ConfigurationFile configurationFile = tClass.getAnnotation(ConfigurationFile.class);
@@ -80,6 +79,11 @@ public class ConfigLoader {
             writer.println(json);
         }
 
-        return (T) defaults;
+        return defaults;
     }
+
+    public GsonBuilder getGsonBuilder() {
+        return gsonBuilder;
+    }
+
 }
